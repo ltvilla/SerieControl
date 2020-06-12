@@ -10,6 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use App\Mail\NovaSerie;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+
 Route::get('/series', 'SeriesController@index')
     ->name('listar_series')->middleware('autenticador');
 Route::get('/series/criar', 'SeriesController@create')
@@ -40,4 +45,32 @@ Route::post('/registrar', 'RegistroController@store');
 Route::get('/sair', function () {
     \Illuminate\Support\Facades\Auth::logout();
     return redirect('/entrar');
+});
+
+
+Route::get('/visualizando-email', function() {
+    return new NovaSerie(
+        'Arrow',
+        5,
+        4
+    );
+});
+
+Route::get('/enviando-email', function() {
+    $email = new NovaSerie(
+        'Arrow',
+        5,
+        4
+    );
+
+    $email->subject = 'Nova Série Adicionada';
+
+    $user = (object)[
+        'email' => 'tiago@teste.com',
+        'name' => 'Tiago'
+    ];
+
+    Mail::to($user)->send($email);
+
+    return 'Email enviado!';
 });

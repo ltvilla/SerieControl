@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AdicionaColunaUseridSeries extends Migration
+class CreateEpisodiosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class AdicionaColunaUseridSeries extends Migration
      */
     public function up()
     {
-        Schema::table('series', function (Blueprint $table) {
-            $table->integer('user_id')->nullable();;
-            $table->foreign('user_id')
+        Schema::create('episodios', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('numero');
+            $table->integer('temporada_id');
+
+            $table->foreign('temporada_id')
                 ->references('id')
-                ->on('users');
+                ->on('temporadas');
         });
     }
 
@@ -28,8 +31,6 @@ class AdicionaColunaUseridSeries extends Migration
      */
     public function down()
     {
-        Schema::table('series', function (Blueprint $table) {
-            $table->dropColumn('user_id');
-        });
+        Schema::dropIfExists('episodios');
     }
 }
