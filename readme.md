@@ -22,3 +22,7 @@ Digite o comando composer install para instalar as dependências;
 <h1>Screen Shots</h1>
 
 <p><img src="/Screenshot/Login.png"></p>
+<p><img src="/Screenshot/Registrar.png"></p>
+<p><img src="/Screenshot/Lista de Series.png"></p>
+<p><img src="/Screenshot/Lista Temporadas.png"></p>
+<p><img src="/Screenshot/Lista Episodios.png"></p>
