@@ -7,10 +7,10 @@
 O aplicativo foi criado com a utilização das seguintes ferramentas:
 
 
-Laravel;
-Banco de dados Sqlite;
-Bootstrap;
-HTML5;.
+<p>Laravel;
+<p>Banco de dados Sqlite;
+<p>Bootstrap;
+<p>HTML5;.
 
 <h1>Modo de Execução</h1>
 Abra o terminal no seu computador no diretório do seu servidor web e digite o seguinte comando:
