@@ -17,6 +17,8 @@ Abra o terminal no seu computador no diretório do seu servidor web e digite o s
 
 git clone https://github.com/ltvilla/SerieControl
 
+Entre dentro da pasta "SerieControl"
+
 Digite o comando composer install para instalar as dependências;
 
 <h1>Screen Shots</h1>
