@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NovaSerieMail;
 use App\Http\Requests\SeriesFormRequest;
 use App\Mail\NovaSerie;
 use App\Serie;
@@ -35,11 +36,21 @@ class SeriesController extends Controller
     public function store(SeriesFormRequest $request, CriadorDeSerie $criadorDeSerie) 
     {
         $userId = auth()->user()->id;
+
+        $capa = null;
+
+        if($request->hasFile('capa')) {
+            $capa = $request->file('capa')->store('serie');
+        }
+        
+
+
         $serie = $criadorDeSerie->criarSerie(
             $request->nome,
             $request->qtd_temporadas,
             $request->ep_por_temporada,
-            $userId
+            $userId,
+            $capa
         );
 
         $email = new NovaSerie(
@@ -50,25 +61,18 @@ class SeriesController extends Controller
 
         $email->subject('Nova Série Adicionada');
 
-        ///users = User::all();
-        ///foreach ($users as $indice => $user) 
-        ///{
-        /// $multiplicado = $indice + 1;    
-        ///    $email = new NovaSerie(
-        ///        $request->nome,
-        ///        $request->qtd_temporadas,
-        ///        $request->ep_por_temporada
-        ///    );
-        ///    Mail::to($user)->send($email);
-        ///    sleep(5);
-        ///}
+        $eventoNovaserie = new NovaSerieMail(
+            $request->nome,
+            $request->qtd_temporadas,
+            $request->ep_por_temporada
+        );
+
+        event($eventoNovaserie);
+
 
         $user = $request->user();
         
-        ///$quando = now()->addSecond($multiplicado* 10);
-        ///Mail::to($user)->later($quando, $email);
 
-        Mail::to($user)->send($email);
 
         $request->session()
             ->flash(

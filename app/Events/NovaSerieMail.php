@@ -10,18 +10,24 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class NovaSerie
+class NovaSerieMail
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    public $nomeSerie;
+    public $qtdTemporada;
+    public $qtdEpisodios;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($nomeSerie, $qtdTemporada, $qtdEpisodios)
     {
-        //
+        $this->nomeSerie = $nomeSerie;
+        $this->qtdTemporadas = $qtdTemporada;
+        $this->qtdEpisodios = $qtdEpisodios;
     }
 
     /**

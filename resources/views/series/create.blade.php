@@ -8,7 +8,7 @@
 @include('erros', ['errors' => $errors])
 
 <body style="background: rgb(65, 165, 187);">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col col-8">
@@ -24,6 +24,12 @@
             <div class="col col-2">
                 <label for="ep_por_temporada">Ep. por temporada</label>
                 <input type="number" class="form-control" name="ep_por_temporada" id="ep_por_temporada">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-12">
+                <label for="capa">Capa</label>
+                <input type="file" class="form-control" name="capa" id="capa">
             </div>
         </div>
 
